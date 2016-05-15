@@ -41,11 +41,6 @@
     text-align: left;
     min-height: 150px;
     }
-    #start_button {
-    border: 0;
-    background-color:transparent;
-    padding: 0;
-    }
     .interim {
     color: gray;
     }
@@ -123,8 +118,8 @@ a.c1 {font-weight: normal;}
           </p>
         </div>
         <div id="div_start">
-          <button id="start_button" onclick="startButton(event)"><img alt="Start" id="start_img"
-          src="/intl/en/chrome/assets/common/images/content/mic.gif"></button>
+          <button id="start_button" onclick="startButton(event)">Start</button>
+          <button id="log_button" onclick="logButton(event)" name="Log" title="Logger">Log</button>
         </div>
         <div id="results">
           <span class="final" id="final_span"></span> <span class="interim" id=
@@ -291,12 +286,14 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.interimResults = true;
 
   recognition.onstart = function() {
+    console.log('onstart');
     recognizing = true;
     showInfo('info_speak_now');
     start_img.src = '/intl/en/chrome/assets/common/images/content/mic-animate.gif';
   };
 
   recognition.onerror = function(event) {
+    console.log('onerror');
     if (event.error == 'no-speech') {
       start_img.src = '/intl/en/chrome/assets/common/images/content/mic.gif';
       showInfo('info_no_speech');
@@ -318,6 +315,7 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onend = function() {
+    console.log('onend');
     recognizing = false;
     if (ignore_onend) {
       return;
@@ -341,6 +339,8 @@ if (!('webkitSpeechRecognition' in window)) {
   };
 
   recognition.onresult = function(event) {
+    console.log('onresult', event.timeStamp);
+    console.log(event);
     var interim_transcript = '';
     if (typeof(event.results) == 'undefined') {
       recognition.onend = null;
@@ -362,6 +362,26 @@ if (!('webkitSpeechRecognition' in window)) {
       showButtons('inline-block');
     }
   };
+
+  recognition.onaudiostart = function() {
+    console.log('onaudiostart');
+  };
+  recognition.onaudioend = function() {
+    console.log('onaudioend');
+  };
+  recognition.onsoundstart = function() {
+    console.log('onsoundstart');
+  };
+  recognition.onsoundend = function() {
+    console.log('onsoundend');
+  };
+  recognition.onspeechstart = function() {
+    console.log('onspeechstart');
+  };
+  recognition.onspeechend = function() {
+    console.log('onspeechend');
+  };
+
 }
 
 function upgrade() {
@@ -428,6 +448,11 @@ function startButton(event) {
   showInfo('info_allow');
   showButtons('none');
   start_timestamp = event.timeStamp;
+  console.log(start_timestamp);
+}
+
+function logButton(event) {
+  console.log('log', event.timeStamp);
 }
 
 function showInfo(s) {
