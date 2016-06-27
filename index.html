@@ -2,9 +2,16 @@
 	<head>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="index.js"></script>
+		<script src="hark.js"></script>
 		<link rel="stylesheet" type="text/css" href="index.css">
 	</head>
 	<body>
-		<div id="text"></div>
+		<button id="mic" onclick="toggle()">
+			<img alt="Start" id="start_img" src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif">
+			<img alt="End" id="end_img" src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic-animate.gif">
+		</button>
+		<div id="status"></div>
+		<div id="object"></div>
+		<div id="log"></div>
 	</body>
 </html>

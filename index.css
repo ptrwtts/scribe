@@ -1,0 +1,33 @@
+body {
+	text-align: center;
+}
+#mic {
+	background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 100px;
+  overflow: hidden;
+  width: 63px;
+  height: 63px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+#end_img {
+	display: none;
+}
+.recognizing #end_img {
+	display: block;
+}
+.recognizing #start_img {
+	display: none;
+}
+.old {
+	color: grey;
+}
+.mismatch {
+	color: red;
+}
+#object {
+	font-size: 60px;
+	padding: 80px;
+}
